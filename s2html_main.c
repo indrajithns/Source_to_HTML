@@ -1,0 +1,81 @@
+/*
+	Name: Indrajith N S
+	Date: 28-10-2024
+	Description: Program to Convert Source .c file into HTML web page file
+*/
+
+
+
+#include <stdio.h>
+#include "s2html_event.h"
+//#include "s2html_event.c"
+#include "s2html_conv.h"
+//#include "s2html_conv.c"
+
+
+/********** main **********/
+
+int main (int argc, char *argv[])
+{
+	FILE *sfp, *dfp; // source and destination file descriptors 
+	pevent_t *event;
+	char dest_file[100];
+
+	if(argc < 2)
+	{
+		printf("\nError!!! Please Enter File Name And Mode\n");
+		printf("Usage: <executable> <file name> \n");
+		printf("Example_1 : ./a.out test.c\n\n");
+		printf("Example_2 : ./a.out test.txt\n\n");
+		return 1;
+	}
+#ifdef DEBUG
+	printf("File To Be Opened : %s\n", argv[1]);
+#endif
+
+	/* opnen the file */
+
+	if(NULL == (sfp = fopen(argv[1], "r")))
+	{
+		printf("Error!!! File %s Could Not Be Opened\n", argv[1]);
+		return 2;
+	}
+	/* Check for output file */
+	if (argc > 2)
+	{
+		sprintf(dest_file, "%s.html", argv[2]);
+	}
+	else
+	{
+		sprintf(dest_file, "%s.html", argv[1]);
+	}
+	/* open dest file */
+	if (NULL == (dfp = fopen(dest_file, "w")))
+	{
+		printf("Error!!! Could Not Create %s Output File\n", dest_file);
+		return 3;
+	}
+
+	/* write HTML starting Tags */
+	html_begin(dfp, HTML_OPEN);
+
+	/* Read from src file convert into html and write to dest file */
+
+	do
+	{
+		event = get_parser_event(sfp);
+		/* call sourc_to_html */
+		source_to_html(dfp, event);
+//		printf("In main : Event = %d\n", event);
+	} while (event->type != PEVENT_EOF);
+
+	/* Call start_or_end_conv function for ending the convertation */
+	html_end(dfp, HTML_CLOSE);
+	
+	printf("\nOutput File %s Generated\n\n", dest_file);
+/* close file */
+	fclose(sfp);
+	fclose(dfp);
+
+	return 0;
+}
