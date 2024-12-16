@@ -1,105 +1,108 @@
-Source Code to HTML Conversion Tool
 
-Overview
+# Source Code to HTML Conversion Tool
 
-The Source Code to HTML Conversion Tool is a C-based program that reads a source code file, parses its content, and generates an HTML file. It provides an efficient way to display source code with syntax highlighting or formatting for web platforms, catering to developers and educators.
+## Overview
 
-Features
+The **Source Code to HTML Conversion Tool** is a C-based program that reads a source code file, parses its content, and generates an HTML file. It provides an efficient way to display source code with syntax highlighting or formatting for web platforms, catering to developers and educators.
 
-Input and Output:
+## Features
 
-Reads source files (e.g., .c, .txt) and generates .html files.
+### Input and Output:
+- Reads source files (e.g., `.c`, `.txt`) and generates `.html` files.
+- Default output filename derived from input with a `.html` extension or customizable via command-line arguments.
 
-Default output filename derived from input with a .html extension or customizable via command-line arguments.
+### Error Handling:
+- Displays detailed error messages for file access or input issues.
 
-Error Handling:
+### Extensible Design:
+- Modular architecture allows easy updates to parsing or HTML generation logic.
 
-Displays detailed error messages for file access or input issues.
+### HTML Syntax Highlighting:
+- Automatically wraps code elements (e.g., keywords, strings, comments) with appropriate HTML tags.
 
-Extensible Design:
+## File Structure
 
-Modular architecture allows easy updates to parsing or HTML generation logic.
+1. **s2html_main.c**
+   - Entry point of the program.
+   - Handles command-line arguments, file I/O, and overall program flow.
+   - Delegates parsing and HTML conversion tasks to modular components.
 
-HTML Syntax Highlighting:
+2. **s2html_event.h / s2html_event.c**
+   - Defines and implements the parsing logic for source code files.
+   - Extracts components like keywords, strings, comments, and more as `pevent_t` structures.
 
-Automatically wraps code elements (e.g., keywords, strings, comments) with appropriate HTML tags.
+3. **s2html_conv.h / s2html_conv.c**
+   - Contains functions to translate parsed events into HTML elements.
+   - Adds appropriate HTML tags for formatting code elements.
 
-File Structure
+## Key Functions
 
-1. s2html_main.c
+- **html_begin(FILE *dfp, const char *open_tag)**  
+  Adds the starting tags to the HTML file.
 
-Entry point of the program.
+- **html_end(FILE *dfp, const char *close_tag)**  
+  Adds the ending tags to the HTML file.
 
-Handles command-line arguments, file I/O, and overall program flow.
+- **get_parser_event(FILE *sfp)**  
+  Reads the next part of the source file (like keywords, strings, or comments).
 
-Delegates parsing and HTML conversion tasks to modular components.
+- **source_to_html(FILE *dfp, pevent_t *event)**  
+  Converts the parsed part of the source file into HTML and writes it to the output file.
 
-2. s2html_event.h / s2html_event.c
-
-Defines and implements the parsing logic for source code files.
-
-Extracts components like keywords, strings, comments, and more as pevent_t structures.
-
-3. s2html_conv.h / s2html_conv.c
-
-Contains functions to translate parsed events into HTML elements.
-
-Adds appropriate HTML tags for formatting code elements.
-
-Key Functions
-
-html_begin(FILE *dfp, const char *open_tag)
-
-Adds the starting tags to the HTML file.
-
-html_end(FILE *dfp, const char *close_tag)
-
-Adds the ending tags to the HTML file.
-
-get_parser_event(FILE *sfp)
-
-Reads the next part of the source file (like keywords, strings, or comments).
-
-source_to_html(FILE *dfp, pevent_t *event)
-
-Converts the parsed part of the source file into HTML and writes it to the output file.
-
-Usage
+## Usage
 
 Run the program using the following syntax:
 
+```bash
 $ ./s2html <source_file> [output_file_prefix]
+```
 
-Compilation
+### Compilation
 
 Compile the program using:
 
+```bash
 $ gcc s2html_main.c s2html_event.c s2html_conv.c -o s2html -I.
+```
 
-Running the Program
+### Running the Program
 
 Run the executable with the required arguments:
 
-Convert a file to HTML:
+- **Convert a file to HTML:**
 
+```bash
 $ ./s2html test.c
+```
+- **Output:** `test.c.html`
 
-Output: test.c.html
+- **Specify a custom output file name:**
 
-Specify a custom output file name:
-
+```bash
 $ ./s2html test.txt output_file
+```
+- **Output:** `output_file.html`
 
-Output: output_file.html
+### Example Code
 
-Example Code
+Using `test.c` and `test.txt` as inputs:
 
-Using test.c and test.txt as inputs:
-
+```bash
 $ ./s2html test.c
-Output: test.c.html
+# Output: test.c.html
 
 $ ./s2html test.txt custom_output
-Output: custom_output.html
+# Output: custom_output.html
+```
 
-Debug Mode
+## Program Flow
+
+1. **Input Validation:**
+   - Verifies that the source file exists and arguments are valid.
+
+2. **HTML Generation:**
+   - Opens source and output files.
+   - Reads source file line by line, parses its content, and converts each parsed element to HTML.
+
+3. **Output:**
+   - Writes formatted HTML content to the output file and displays a success message.
