@@ -1,11 +1,10 @@
 /* 
-    this is multi-line comment 
-    Name: Indrajith
-    Date: 28-Oct-2024
-    Description: Program to calculate factorial using recursion
+    This program calculates the factorial of a given positive integer using recursion.
+    It prompts the user for an input, checks if the number is non-negative, and then
+    calculates and displays the factorial of the number.
 */
 
-/*
+#include <stdio.h>
 
 // Function to calculate factorial using recursion
 unsigned long long factorial(int n) {
@@ -18,17 +17,19 @@ unsigned long long factorial(int n) {
 int main() {
     int n;
 
+    // Input the number
     printf("Enter a positive integer: ");
     scanf("%d", &n);
 
+    // Check for negative input
     if (n < 0) {
         printf("Factorial is not defined for negative numbers.\n");
     } else {
+        // Output the result
         printf("Factorial of %d = %llu\n", n, factorial(n));
     }
 
     return 0;
 }
 
-*/
 

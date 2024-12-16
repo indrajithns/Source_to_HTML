@@ -1,3 +1,15 @@
+/*
+ *  Event Management for Source-to-HTML Analyzer Function
+ *
+ * This program analyzes a C source code file to identify keywords, comments, 
+ * constants, operators, and strings. It processes the file character by 
+ * character and generates events for each identified element.
+ *
+ * Main features:
+ * - Identifies comments, keywords, constants, strings, and operators.
+*/
+
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

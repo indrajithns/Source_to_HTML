@@ -1,25 +1,37 @@
-.reserved_key1{
-   		color:green;
-	      }
-.reserved_key2{
-    		color:goldenrod;
-	      }
-.comment{
-    		color:blue;
-        }
-.preprocess_dir{
-    		color:purple;
-	       }
-.header_file{
-    		color:red;
-	    }
-.string{
-    	 	color:magenta;
-       }
-.numeric_constant{
-    		 color:brown;
-	        }
-.ascii_char{
-    		 color:firebrick;
-	        }
+/* 
+ * CSS Class Descriptions:
+ * These classes are used to apply different colors for various components of the source code:
+*/
+
+ .reserved_key1 {
+    color: green;
+}
+
+.reserved_key2 {
+    color: goldenrod;
+}
+
+.comment {
+    color: blue;
+}
+
+.preprocess_dir {
+    color: purple;
+}
+
+.header_file {
+    color: red;
+}
+
+.string {
+    color: magenta;
+}
+
+.numeric_constant {
+    color: brown;
+}
+
+.ascii_char {
+    color: firebrick;
+}
 
