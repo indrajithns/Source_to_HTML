@@ -51,35 +51,35 @@ The **Source Code to HTML Conversion Tool** is a C-based program that reads a so
 
 ## Usage
 
-Run the program using the following syntax:
-
-```bash
-$ ./s2html <source_file> [output_file_prefix]
-```
-
 ### Compilation
 
 Compile the program using:
 
 ```bash
-$ gcc s2html_main.c s2html_event.c s2html_conv.c -o s2html -I.
+ gcc s2html_main.c s2html_event.c s2html_conv.c -o s2html -I.
 ```
 
 ### Running the Program
+
+Run the program using the following syntax:
+
+```bash
+ ./s2html <source_file> [output_file_prefix]
+```
 
 Run the executable with the required arguments:
 
 - **Convert a file to HTML:**
 
 ```bash
-$ ./s2html test.c
+ ./s2html test.c
 ```
 - **Output:** `test.c.html`
 
 - **Specify a custom output file name:**
 
 ```bash
-$ ./s2html test.txt output_file
+ ./s2html test.txt output_file
 ```
 - **Output:** `output_file.html`
 
@@ -88,11 +88,11 @@ $ ./s2html test.txt output_file
 Using `test.c` and `test.txt` as inputs:
 
 ```bash
-$ ./s2html test.c
-# Output: test.c.html
+ ./s2html test.c
+ Output: test.c.html
 
-$ ./s2html test.txt custom_output
-# Output: custom_output.html
+ ./s2html test.txt custom_output
+ Output: custom_output.html
 ```
 
 ## Program Flow
